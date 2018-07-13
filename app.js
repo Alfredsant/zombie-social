@@ -6,26 +6,36 @@ var bodyParser= require("body-parser");
 var cookieParser= require("cookie-parser");
 var flash= require("connect-flash");
 var session=require("express-session");
+var passport = require("passport");
 
 var routes= require("./routes");
 var app= express();
+var passportsetup = require("./passportsetup");
 
 mongoose.connect("mongodb://localhost:27017/zombie_nest");
+
+passportsetup();
+
 app.set("port",process.env.PORT||3000);
-var publicPath = path.join(__dirname,'bootstrap');
-app.use('/recursos',express.static(publicPath));
+//direccion donde estan las rutas
 app.set("views",path.resolve(__dirname,"views"));
 app.set("view engine","ejs");
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(session({
-    secret:"TKRv0iJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,>>MX",
+    secret:"TKRvTKR",
     resave: true,
     saveUninitialized:true
 
 }));
 app.use(flash());
+
+app.use(passport.initialize({
+    userProperty:"zombie"
+}));
+app.use(passport.session());
+
 app.use(routes);
 app.listen(app.get("port"),()=>{
     console.log("la aplicacion inicio por el puerto"+app.get("port"));

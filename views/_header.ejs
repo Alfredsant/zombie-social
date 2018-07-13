@@ -4,7 +4,7 @@
     <title>Zombie Nest</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/../recursos/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 <div class=" navbar navbar-default navbar-static-top" role="navigation">
@@ -15,6 +15,9 @@
         <ul class="nav navbar-nav navbar-right">
             <%if (currentZombie){%>
             <li>
+                 <a href="/equipment">Equipamiento</a>
+            </li>
+            <li>
                 <a href="/edit">Hola, <%= currentZombie.name() %></a>
 
             </li>
@@ -22,6 +25,10 @@
                 <a href="/logout">Salir</a>
 
             </li>
+            <li>
+            <a href="#"><%= currentZombie.roles() %></a>
+
+        </li>
             
             <%}else{%>
             <li>
